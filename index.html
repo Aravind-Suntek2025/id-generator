@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ID Generator</title></head>
+<body style="font-family: system-ui, sans-serif; padding:20px;">
+  <h2>Create ID</h2>
+  <form action="generate.php" method="post" enctype="multipart/form-data">
+    <div>
+      <label>Name:</label><br>
+      <input type="text" name="name" value="Gaddam Aravind Goud" required style="width:320px;">
+    </div><br>
+    <div>
+      <label>Designation:</label><br>
+      <input type="text" name="designation" value="IT Admin" required style="width:320px;">
+    </div><br>
+    <div>
+      <label>Photo:</label><br>
+      <input type="file" name="photo" accept="image/*" required>
+    </div><br>
+    <button type="submit">Generate</button>
+  </form>
+</body>
+</html>
