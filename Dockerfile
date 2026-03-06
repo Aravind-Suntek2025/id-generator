@@ -1,16 +1,18 @@
-# Simple NGINX + PHP-FPM image
+# NGINX + PHP-FPM base image
 FROM richarvey/nginx-php-fpm:latest
 
-# Configure the web root to our repo root (contains index.html & generate.php)
+# Web root (this image serves from /var/www/html)
 ENV WEBROOT=/var/www/html
 
-# Copy the whole repo into the image
+# Copy your app into the image
 COPY . /var/www/html
 
-# Make sure the output folder exists and is writable by PHP
+# Use our Nginx site config (override the default in the image)
+COPY conf/nginx/default.conf /etc/nginx/sites-enabled/default.conf
+
+# Remove the default phpinfo index.php that the base image ships with
+RUN rm -f /var/www/html/index.php
+
+# Ensure /output is writable for generated PNGs
 RUN mkdir -p /var/www/html/output \
     && chmod -R 777 /var/www/html/output
-
-# (Optional) If you have a custom nginx.conf, copy it like:
-# COPY conf/nginx/default.conf /etc/nginx/sites-enabled/default.conf
-# and ensure it listens on the $PORT env if you prefer. Otherwise we'll set Render's service port to 80.
